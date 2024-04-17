@@ -14,7 +14,7 @@ final class IndexResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => new AuthorResource($this->author),
+            'author' => new AuthorResource($this->author),
             'photo' => $this->photo,
             'is_visible' => $this->is_visible,
             'created_at' => $this->created_at->toDateTimeString(),
