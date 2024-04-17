@@ -2,9 +2,23 @@
 
 namespace Mozz\Support\Models;
 
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property string $title
+ * @property string $photo
+ * @property int $is_visible
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property-read User $author
+ */
 final class Post extends Model
 {
     use HasFactory;
@@ -28,4 +42,9 @@ final class Post extends Model
         'photo',
         'is_visible'
     ];
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
