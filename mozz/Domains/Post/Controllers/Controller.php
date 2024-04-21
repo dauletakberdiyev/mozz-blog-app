@@ -48,8 +48,11 @@ final class Controller extends BaseController
         );
     }
 
-    public function delete()
+    public function delete(Post $post): JsonResponse
     {
-
+        return $this->response(
+            self::translate('post.delete'),
+            $post->delete()
+        );
     }
 }
