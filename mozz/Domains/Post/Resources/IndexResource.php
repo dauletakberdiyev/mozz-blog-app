@@ -18,6 +18,7 @@ final class IndexResource extends JsonResource
             'photo' => $this->photo,
             'is_visible' => $this->is_visible,
             'created_at' => $this->created_at->toDateTimeString(),
+            'tags' => TagResource::collection($this->tags),
         ];
     }
 }

@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Http\JsonResponse;
 use Mozz\Domains\Post\Handlers\CreateHandler;
 use Mozz\Domains\Post\Handlers\IndexHandler;
+use Mozz\Domains\Post\Handlers\UpdateHandler;
 use Mozz\Domains\Post\Requests\CreateRequest;
+use Mozz\Domains\Post\Requests\UpdateRequest;
 use Mozz\Domains\Post\Resources\CreateResource;
 use Mozz\Domains\Post\Resources\IndexResource;
+use Mozz\Domains\Post\Resources\UpdateResource;
 use Mozz\Support\Models\Post;
 
 final class Controller extends BaseController
@@ -37,9 +40,12 @@ final class Controller extends BaseController
         );
     }
 
-    public function update()
+    public function update(UpdateRequest $request, Post $post, UpdateHandler $handler): JsonResponse
     {
-
+        return $this->response(
+            self::translate('post.update'),
+            new UpdateResource($handler->handle($request->getDTO(), $post))
+        );
     }
 
     public function delete()

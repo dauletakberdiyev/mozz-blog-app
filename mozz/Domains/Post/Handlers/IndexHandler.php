@@ -10,7 +10,7 @@ final readonly class IndexHandler
     public function handle(): Collection
     {
         return Post::query()
-            ->with('author')
+            ->with(['author', 'tags'])
             ->where('is_visible', 1)
             ->get();
     }
